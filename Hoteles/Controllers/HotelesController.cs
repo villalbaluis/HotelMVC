@@ -8,11 +8,11 @@ namespace Hoteles.Controllers
 {
     public class HotelesController : Controller
     {
-        private HotelesContext _context = new HotelesContext();
+        private readonly HotelesContext _context = new HotelesContext();
 
-        public ActionResult Index() // Vista Index, donde se mostrarán todos los hoteles en base de datos.
+        public ActionResult Index() // Vista Index, donde se mostrarán todos los objetos en base de datos.
         {
-            var hotel = _context.Hoteles.Include(habitacion => habitacion.Habitaciones); // Consulta de hoteles registrados en BD.
+            var hotel = _context.Hoteles.Include(habitacion => habitacion.Habitaciones); // Consulta de objetos registrados en BD.
             return View(_context.Hoteles.ToList());
         }
 

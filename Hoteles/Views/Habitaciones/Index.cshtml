@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Hoteles.Models.Habitacion>
+
+@{
+    ViewBag.Title = "Listado de Habitaciones";
+}
+
+<h2 class="text-center">
+    Lista de Habitaciones
+    <p class="btn btn-secondary ms-2" type="button">
+        @Html.ActionLink("Crear Habitación", "Create", null, null, new { @class = "nav-link" })
+    </p>
+</h2>
+<hr />
+
+@if (@ViewBag.ErrorMessage != null)
+{
+    <h5 class="fst-italic text-center">
+        @ViewBag.ErrorMessage
+    </h5>
+    <hr />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hotel.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capacidad_Habitacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tarifa_Noche)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponible)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hotel.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capacidad_Habitacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tarifa_Noche)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disponible)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdHabitacion }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdHabitacion }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdHabitacion })
+            </td>
+        </tr>
+    }
+
+</table>

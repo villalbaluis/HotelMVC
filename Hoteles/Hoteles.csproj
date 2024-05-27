@@ -275,10 +275,11 @@
     <Content Include="Views\Hoteles\Edit.cshtml" />
     <Content Include="Views\Hoteles\Delete.cshtml" />
     <Content Include="Views\Hoteles\Details.cshtml" />
+    <Content Include="Views\Habitaciones\Index.cshtml" />
+    <Content Include="Views\Habitaciones\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Habitaciones\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
