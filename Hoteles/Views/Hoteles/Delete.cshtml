@@ -1,0 +1,43 @@
+﻿@model Hoteles.Models.Hotel
+
+@{
+    ViewBag.Title = "¿Seguro de eliminar?";
+}
+
+<h2 class="text-center">
+    Eliminando hotel [@Html.DisplayFor(model => model.Nombre)]
+    <p class="btn btn-secondary ms-2" type="button">
+        @Html.ActionLink("Regresar", "Index", null, null, new { @class = "nav-link" })
+    </p>
+    <p class="btn btn-primary ms-2" type="button">
+        @Html.ActionLink("Editar Hotel", "Edit", new { id = Model.IdHotel }, new { @class = "nav-link" })
+    </p>
+</h2>
+<hr />
+
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/prisaradioco/YHLJ4N52JRGIBIQCJKAYOSJVVU.png" alt="" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayNameFor(model => model.Nombre): @Html.DisplayFor(model => model.Nombre)</h5>
+                        <p class="card-text">@Html.DisplayFor(model => model.Descripcion)</p>
+                        <a href="#" class="btn btn-outline-success btn-sm">@Html.DisplayNameFor(model => model.Cantidad_Habitacion)</a>
+                        <a href="#" class="btn btn-outline-warning btn-sm">@Html.DisplayFor(model => model.Cantidad_Habitacion)</a>
+                    </div>
+                    <div class="card-footer">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-actions">
+                                <input type="submit" value="Eliminar Hotel" class="btn btn-outline-danger btn-group-lg" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

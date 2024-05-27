@@ -8,30 +8,31 @@ namespace Hoteles.Controllers
 {
     public class HotelesController : Controller
     {
-        private HotelesContext db = new HotelesContext();
+        private HotelesContext _context = new HotelesContext();
 
-        public ActionResult Index()
+        public ActionResult Index() // Vista Index, donde se mostrarán todos los hoteles en base de datos.
         {
-            var hotel = db.Hoteles.Include(habitacion => habitacion.Habitaciones);
-            return View(db.Hoteles.ToList());
+            var hotel = _context.Hoteles.Include(habitacion => habitacion.Habitaciones); // Consulta de hoteles registrados en BD.
+            return View(_context.Hoteles.ToList());
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return View(); // Retorno de vista para creación de Hotel
         }
 
         [HttpPost]
-        public ActionResult Create(Hotel hotel)
+        public ActionResult Create(Hotel hotel) // Metodo para creación de hotel
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Recibe un modelo, y se valida si el modelo es valido.
             {
                 try
                 {
-                    db.Hoteles.Add(hotel);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    // Se añade el modelo al contexto de los hoteles.
+                    _context.Hoteles.Add(hotel);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index"); // Se redirigue a la página de la lista de hoteles.
                 }
                 catch (Exception ex)
                 {
@@ -46,37 +47,34 @@ namespace Hoteles.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id) // Metodo para retornar vista de edición de hotel.
         {
-            Hotel hotel = db.Hoteles.Find(id);
-            if (hotel != null)
+            Hotel hotel = _context.Hoteles.Find(id); // Se busca el hotel por el ID dado.
+            if (hotel == null) // En caso de error, se retorna la vista con mensaje erroneo.
             {
-                return View(hotel);
-            }
-            else
-            {
-                ViewBag.Info = ("El hotel no ha sido encontrado.");
+                ViewBag.Info = ("Ha ocurrido un error, el hotel no ha sido encontrado.");
                 return View();
             }
+            return View(hotel); // Se retorna la vista con el formulario para edición.
         }
 
         [HttpPost]
-        public ActionResult Edit(Hotel hotel)
+        public ActionResult Edit(Hotel hotel) // Metodo para guardar la información editada.
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(hotel).State = EntityState.Modified; // se realiza el cambio del registro
-                    db.SaveChanges(); // guardar cambios
-                    return RedirectToAction("Index"); // redireccionamiento
+                    _context.Entry(hotel).State = EntityState.Added; // Se realiza el cambio del registro a través del modelo
+                    _context.SaveChanges(); // Se genera la transacción en Base de datos
+                    return RedirectToAction("Index"); // Redirige a la página de todos los registros.
                 }
-                catch (Exception ex)
+                catch (Exception ex) // En caso de error, se retorna la vista con un mensaje.
                 {
-                    if (ex.InnerException != null && ex.InnerException.InnerException != null
-                        && ex.InnerException.InnerException.Message.Contains("IndexNombre"))
+                    if (ex.InnerException
+                        != null)
                     {
-                        ViewBag.ErrorMessage = "Error ya existe un Hotel con el nombre: " + hotel.Nombre;
+                        ViewBag.ErrorMessage = "Ha ocurrido un error en la edición del hotel (" + hotel.Nombre + ") Error: " + ex.Message;
                         return View(hotel);
                     }
                 }
@@ -85,47 +83,44 @@ namespace Hoteles.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id) // Metodo para retornar vista de eliminación del registro
         {
-            Hotel hotel = db.Hoteles.Find(id);
-            if (hotel != null)
+            Hotel hotel = _context.Hoteles.Find(id); // Se busca el registro por el ID dado.
+            if (hotel == null) // En caso de no encontrar el ID, se retorna con mensaje de error.
             {
-                return View(hotel);
-            }
-            else
-            {
-                ViewBag.Info = ("Hotel no encontrado...");
+                ViewBag.Info = ("Error, el hotel no ha sido encontrado.");
                 return View();
             }
+            return View(hotel);
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id) // Metodo para eliminar el objeto del contexto.
         {
-            Hotel hotel = db.Hoteles.Find(id);
+            Hotel hotel = _context.Hoteles.Find(id); // Se busca el registro por el ID dado.
             if (hotel != null)
             {
                 try
                 {
-                    db.Hoteles.Remove(hotel); // se realiza la eliminacion del registro
-                    db.SaveChanges(); // guardar cambios
+                    _context.Hoteles.Remove(hotel); // se realiza la eliminacion del registro
+                    _context.SaveChanges(); // guardar cambios
                     return RedirectToAction("Index"); // redireccionamiento
                 }
-                catch (Exception ex)
+                catch (Exception ex) // En caso de error, retornamos a la misma vista con mensaje de error.
                 {
-                    ViewBag.ErrorMessage = "Error, el Hotel no se ha eliminado... " + ex;
-
+                    ViewBag.ErrorMessage = "Ocurrió un error procesando la petición de eliminación... Error:" + ex;
+                    return View(hotel);
                 }
             }
             return View(hotel);
         }
 
         [HttpGet]
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id) // Metodo para retornar vista del objeto dado por el ID
         {
             if (id != null)
             {
-                Hotel hotel = db.Hoteles.Find(id);
+                Hotel hotel = _context.Hoteles.Find(id);
                 return View(hotel);
             }
             return View();
@@ -136,7 +131,7 @@ namespace Hoteles.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }

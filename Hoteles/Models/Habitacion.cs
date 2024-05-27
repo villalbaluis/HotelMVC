@@ -11,9 +11,9 @@ namespace Hoteles.Models
         public int IdHabitacion { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
-        [StringLength(15, MinimumLength = 3, ErrorMessage = "El campo {0} debe tener entre {2} y {1} caracteres")]
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "El campo {0} debe tener entre {2} y {1} caracteres")]
         [Index("IndexNombre", IsUnique = true)]
-        [DisplayName("Nombre Habitacion")]
+        [DisplayName("Habitación")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
@@ -25,6 +25,7 @@ namespace Hoteles.Models
         public decimal Tarifa_Noche { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es obligatorio")]
+        [DisplayName("Disponibilidad")]
         public bool Disponible { get; set; }
 
         //Llave foranea para la relacion con Hotel

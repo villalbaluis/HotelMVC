@@ -1,7 +1,7 @@
-﻿namespace Hoteles.Migrations
-{
-    using System.Data.Entity.Migrations;
+﻿using System.Data.Entity.Migrations;
 
+namespace Hoteles.Migrations
+{
     internal sealed class Configuration : DbMigrationsConfiguration<Hoteles.Models.HotelesContext>
     {
         public Configuration()
