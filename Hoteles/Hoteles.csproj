@@ -277,6 +277,9 @@
     <Content Include="Views\Hoteles\Details.cshtml" />
     <Content Include="Views\Habitaciones\Index.cshtml" />
     <Content Include="Views\Habitaciones\Create.cshtml" />
+    <Content Include="Views\Habitaciones\Edit.cshtml" />
+    <Content Include="Views\Habitaciones\Delete.cshtml" />
+    <Content Include="Views\Habitaciones\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
