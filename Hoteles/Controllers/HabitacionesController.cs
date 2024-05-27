@@ -78,7 +78,7 @@ namespace Hoteles.Controllers
                 {
                     if (ex.InnerException != null)
                     {
-                        ViewBag.ErrorMessage = "Falló en edición de torneo, error: (" + ex.InnerException.Message + ").";
+                        ViewBag.ErrorMessage = "Falló en edición de la habitación, error: (" + ex.InnerException.Message + ").";
                         ViewBag.IdHotel = new SelectList(_context.Hoteles, "IdHotel", "Nombre", habitacion.IdHotel);
                         return View(habitacion);
                     }
