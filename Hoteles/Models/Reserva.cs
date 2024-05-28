@@ -26,7 +26,6 @@ namespace Hoteles.Models
         [Required(ErrorMessage = "El Campo {0} es Obligatorio")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [GreaterThan("FechaInicio", ErrorMessage = "El campo {0} debe ser mayor que {1}")]
         [DisplayName("Fecha Fin")]
         public DateTime Fecha_Fin { get; set; }
 

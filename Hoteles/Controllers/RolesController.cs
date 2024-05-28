@@ -12,7 +12,7 @@ namespace Hoteles.Controllers
 {
     public class RolesController : Controller
     {
-        private HotelesContext db = new HotelesContext();
+        private readonly HotelesContext db = new HotelesContext();
 
         // GET: Roles
         public ActionResult Index()
