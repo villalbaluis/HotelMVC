@@ -4,14 +4,15 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Creando Nuevo Rol</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+
+<div class="form-horizontal">
+    <div class="container">
         <h4>Rol</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -32,15 +33,16 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-10 m-2">
+                <input type="submit" value="Crear" class="btn btn-success" />
             </div>
         </div>
     </div>
-}
+</div>
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="m-2">
+    @Html.ActionLink("Regresar", "Index", new { }, new { @class = "btn btn-outline-danger" })
 </div>
 
 @section Scripts {
